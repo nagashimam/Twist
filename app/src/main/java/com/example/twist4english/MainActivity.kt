@@ -26,16 +26,13 @@ class MainActivity : AppCompatActivity() {
             this.adapter = ScreenSlidePagerAdapter(supportFragmentManager)
         }
 
-        fab.setOnClickListener {proceedIfReady()}
+        fab.setOnClickListener {
+            val selectedLevel = Level.values()[mPager.currentItem]
+            startActivity(Intent(this, PlayActivity::class.java).apply {
+                putExtra(CONFIDENCE_SCORE, selectedLevel.requiredConfidentScore)
+            })
+        }
     }
-
-    private fun proceedIfReady(){
-        val selectedLevel = Level.values()[mPager.currentItem]
-        startActivity(Intent(this, PlayActivity::class.java).apply {
-            putExtra(CONFIDENCE_SCORE, selectedLevel.requiredConfidentScore)
-        })
-    }
-
 
 }
 
