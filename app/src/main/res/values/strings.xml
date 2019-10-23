@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Twist</string>
+    <string name="action_settings">settings</string>
+    <string name="level_title">Swipe to choose level</string>
+</resources>
