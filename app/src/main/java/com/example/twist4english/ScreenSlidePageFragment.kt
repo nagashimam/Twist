@@ -18,7 +18,7 @@ class ScreenSlidePageFragment : Fragment() {
     ): View? {
 
         return arguments?.let {
-            val view = inflater.inflate(R.layout.level_pager, container, false)
+            val view = inflater.inflate(R.layout.fragment_level, container, false)
             val linearLayout = view.findViewById<LinearLayout>(R.id.level_pager)
 
             linearLayout.findViewById<TextView>(R.id.level_title).text =
