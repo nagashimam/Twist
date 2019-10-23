@@ -14,8 +14,6 @@ const val CONFIDENCE_SCORE = "CONFIDENCE_SCORE"
 
 class MainActivity : AppCompatActivity() {
 
-    private var isReadyToProceed = false
-
     private lateinit var mPager : ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,14 +30,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun proceedIfReady(){
-        if (isReadyToProceed) {
-            val selectedLevel = Level.values()[mPager.currentItem]
-            startActivity(Intent(this, PlayActivity::class.java).apply {
-                putExtra(CONFIDENCE_SCORE, selectedLevel.requiredConfidentScore)
-            })
-        } else {
-            isReadyToProceed = true
-        }
+        val selectedLevel = Level.values()[mPager.currentItem]
+        startActivity(Intent(this, PlayActivity::class.java).apply {
+            putExtra(CONFIDENCE_SCORE, selectedLevel.requiredConfidentScore)
+        })
     }
 
 
