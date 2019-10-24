@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Twist</string>
     <string name="level_title">Swipe to choose level</string>
+    <string name="play_title">Tap the mic to start</string>
 </resources>
