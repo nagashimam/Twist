@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import kotlinx.android.synthetic.main.activity_main.*
 
 const val TONGUE_TWISTER = "TONGUE_TWISTER"
 
@@ -17,7 +18,7 @@ class PlayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play)
-
+        setSupportActionBar(toolbar)
         mPager = findViewById<ViewPager>(R.id.pager).apply {
             this.adapter = TongueTwisterSlidePagerAdapter(supportFragmentManager)
         }
