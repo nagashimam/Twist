@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 
-class ScreenSlidePageFragment : Fragment() {
+class LevelSlideFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

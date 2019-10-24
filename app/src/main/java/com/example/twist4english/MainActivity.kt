@@ -42,7 +42,7 @@ private class ScreenSlidePagerAdapter(fm: FragmentManager) :
     override fun getCount(): Int = Level.values().size
 
     override fun getItem(position: Int): Fragment {
-        return ScreenSlidePageFragment().apply {
+        return LevelSlideFragment().apply {
             val level = Level.values()[position]
             arguments = Bundle().apply {
                 putInt(CONFIDENCE_SCORE, level.requiredConfidentScore)
