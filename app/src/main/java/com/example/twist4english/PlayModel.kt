@@ -7,7 +7,7 @@ typealias PlayResult = Pair<Pair<String, Float>, Pair<String, Float>>
 object PlayModel {
     fun judgeResult(result: PlayResult, presenterContract: PlayPresenterContract) {
         if (isValidResult(result)) {
-            presenterContract.nextTangueTwister(result.second.second)
+            presenterContract.nextTongueTwister(result.second.second)
         } else {
             presenterContract.retry(result.second)
         }

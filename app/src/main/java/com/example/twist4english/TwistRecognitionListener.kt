@@ -14,7 +14,7 @@ class TwistRecognitionListener(private val contract: PlayContract) :
         contract.showMessage("try again\nrecognition: ${result.first}\nscore: ${result.second}")
     }
 
-    override fun nextTangueTwister(score: Float) {
+    override fun nextTongueTwister(score: Float) {
         contract.showNextTongueTwister(score)
     }
 
