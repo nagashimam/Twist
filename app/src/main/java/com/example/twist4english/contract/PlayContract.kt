@@ -1,4 +1,4 @@
-package com.example.twist4english
+package com.example.twist4english.contract
 
 interface PlayContract {
     fun start()

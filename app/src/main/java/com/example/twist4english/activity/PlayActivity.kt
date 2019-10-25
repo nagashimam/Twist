@@ -1,4 +1,4 @@
-package com.example.twist4english
+package com.example.twist4english.activity
 
 import android.Manifest.permission.RECORD_AUDIO
 import android.content.Intent
@@ -12,6 +12,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.example.twist4english.*
+import com.example.twist4english.contract.PlayContract
+import com.example.twist4english.fragment.TongueTwisterSlideFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TONGUE_TWISTER = "TONGUE_TWISTER"
@@ -65,7 +68,9 @@ class PlayActivity : AppCompatActivity(), PlayContract {
     }
 
     private fun requestPermissionToRecord() {
-        ActivityCompat.requestPermissions(this, arrayOf(RECORD_AUDIO), REQUEST_RECORD_AUDIO)
+        ActivityCompat.requestPermissions(this, arrayOf(RECORD_AUDIO),
+            REQUEST_RECORD_AUDIO
+        )
     }
 
     override fun end() {
@@ -92,14 +97,20 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         setSupportActionBar(toolbar)
 
         mPager = findViewById<OneWaySwipePager>(R.id.pager).apply {
-            this.adapter = TongueTwisterSlidePagerAdapter(supportFragmentManager)
+            this.adapter = TongueTwisterSlidePagerAdapter(
+                supportFragmentManager
+            )
             setDirection(SwipeDirection.LEFT)
         }
 
         speechRecognizer =
             SpeechRecognizer
                 .createSpeechRecognizer(applicationContext)
-                .apply { setRecognitionListener(TwistRecognitionListener(this@PlayActivity)) }
+                .apply { setRecognitionListener(
+                    TwistRecognitionListener(
+                        this@PlayActivity
+                    )
+                ) }
 
         fab.setOnClickListener { start() }
     }

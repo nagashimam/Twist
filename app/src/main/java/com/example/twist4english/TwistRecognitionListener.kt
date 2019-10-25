@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer.*
 import android.util.Log
+import com.example.twist4english.contract.PlayContract
+import com.example.twist4english.contract.PlayPresenerContract
 
 class TwistRecognitionListener(private val contract: PlayContract) :
     RecognitionListener,

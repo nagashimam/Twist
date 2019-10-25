@@ -1,4 +1,4 @@
-package com.example.twist4english
+package com.example.twist4english.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.example.twist4english.fragment.LevelSlideFragment
+import com.example.twist4english.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TITLE = "TITLE"
@@ -23,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         mPager = findViewById<ViewPager>(R.id.pager).apply {
-            this.adapter = ScreenSlidePagerAdapter(supportFragmentManager)
+            this.adapter =
+                ScreenSlidePagerAdapter(supportFragmentManager)
         }
 
         fab.setOnClickListener {
