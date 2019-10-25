@@ -2,6 +2,7 @@ package com.example.twist4english.activity
 
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.twist4english.R
 import com.google.firebase.firestore.FirebaseFirestore
@@ -29,14 +30,14 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun readScores(db: FirebaseFirestore, score: Int, bonus: Int) {
-        db.collection("users")
+        db.collection("scores")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful && task.result != null) {
                     val scoreSize = task.result?.size() ?: 1
                     var counter = 0
                     task.result?.forEach {
-                        if (it.data["score"].toString().toInt() > score) {
+                        if (it.data["score"].toString().toInt() > score * bonus) {
                             counter++
                         }
                     }
@@ -60,7 +61,11 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun showErrorMessage() {
-
+        AlertDialog.Builder(this)
+            .setTitle("Error")
+            .setMessage("We couldn't connect to the database.\nPlease try again.")
+            .setPositiveButton("OK", null)
+            .show()
     }
 
 }
