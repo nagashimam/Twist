@@ -1,6 +1,9 @@
 package com.example.twist4english.activity
 
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -10,10 +13,16 @@ import kotlinx.android.synthetic.main.activity_score.*
 
 
 class ScoreActivity : AppCompatActivity() {
+    private lateinit var progressBar: ProgressBar
+    private lateinit var linearLayout: LinearLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
         setSupportActionBar(toolbar)
+
+        progressBar = findViewById(R.id.progressbar)
+        linearLayout = findViewById(R.id.linearLayout)
 
         val score = intent.getIntExtra(SCORE, 0)
         val bonus = intent.getIntExtra(CONFIDENCE_SCORE, 0)
@@ -54,6 +63,9 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun setDataToTextViews(score: Int, bonus: Int, rank: Int) {
+        progressBar.visibility = ProgressBar.INVISIBLE
+        linearLayout.visibility = View.VISIBLE
+
         findViewById<TextView>(R.id.score).text = score.toString()
         findViewById<TextView>(R.id.bonus).text = bonus.toString()
         findViewById<TextView>(R.id.total).text = (score * bonus).toString()
@@ -61,6 +73,8 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun showErrorMessage() {
+        progressBar.visibility = ProgressBar.INVISIBLE
+
         AlertDialog.Builder(this)
             .setTitle("Error")
             .setMessage("We couldn't connect to the database.\nPlease try again.")
