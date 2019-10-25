@@ -1,15 +1,15 @@
 package com.example.twist4english
 
-import com.example.twist4english.contract.PlayPresenerContract
+import com.example.twist4english.contract.PlayPresenterContract
 import java.util.*
 
 typealias PlayResult = Pair<Pair<String, Float>, Pair<String, Float>>
 object PlayModel {
-    fun judgeResult(result: PlayResult, presenerContract: PlayPresenerContract) {
+    fun judgeResult(result: PlayResult, presenterContract: PlayPresenterContract) {
         if (isValidResult(result)) {
-            presenerContract.nextTangueTwister(result.second.second)
+            presenterContract.nextTangueTwister(result.second.second)
         } else {
-            presenerContract.retry(result.second)
+            presenterContract.retry(result.second)
         }
     }
 

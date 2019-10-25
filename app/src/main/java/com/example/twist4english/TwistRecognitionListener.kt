@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer.*
 import com.example.twist4english.contract.PlayContract
-import com.example.twist4english.contract.PlayPresenerContract
+import com.example.twist4english.contract.PlayPresenterContract
 
 class TwistRecognitionListener(private val contract: PlayContract) :
     RecognitionListener,
-    PlayPresenerContract {
+    PlayPresenterContract {
 
     override fun retry(result: Pair<String, Float>) {
         contract.showMessage("try again\nrecognition: ${result.first}\nscore: ${result.second}")
