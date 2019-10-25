@@ -116,6 +116,7 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         Pair(tongueTwisters[mPager.currentItem], intent.getFloatExtra(CONFIDENCE_SCORE, 0F))
 
     override fun showNextTongueTwister(score: Float) {
+        showMessage("great! score:$score")
         mPager.currentItem++
     }
 
