@@ -51,10 +51,17 @@ class ScoreActivity : AppCompatActivity() {
                         }
                     }
 
+                    val percent = (counter.toDouble() / scoreSize.toDouble() * 100).toInt()
+                    val displayPercent = if (percent == 0) {
+                        1
+                    } else {
+                        percent
+                    }
+
                     setDataToTextViews(
                         score,
                         bonus,
-                        (counter.toDouble() / scoreSize.toDouble() * 100).toInt()
+                        displayPercent
                     )
                 } else {
                     showErrorMessage()
