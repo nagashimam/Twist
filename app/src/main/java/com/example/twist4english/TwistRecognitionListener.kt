@@ -10,11 +10,17 @@ class TwistRecognitionListener(private val contract: PlayContract) :
     RecognitionListener,
     PlayPresenterContract {
 
+    override fun finish(scores: List<Float>) {
+        contract.showMessage("great! score:${scores.last()}")
+        contract.proceedToScoreActivity(scores)
+    }
+
     override fun retry(result: Pair<String, Float>) {
         contract.showMessage("try again\nrecognition: ${result.first}\nscore: ${result.second}")
     }
 
     override fun nextTongueTwister(score: Float) {
+        contract.showMessage("great! score:$score")
         contract.showNextTongueTwister(score)
     }
 

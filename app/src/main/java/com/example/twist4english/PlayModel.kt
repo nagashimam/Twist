@@ -5,9 +5,18 @@ import java.util.*
 
 typealias PlayResult = Pair<Pair<String, Float>, Pair<String, Float>>
 object PlayModel {
+
+    private val scores = ArrayList<Float>()
     fun judgeResult(result: PlayResult, presenterContract: PlayPresenterContract) {
+
         if (isValidResult(result)) {
-            presenterContract.nextTongueTwister(result.second.second)
+            val score = result.second.second
+            scores.add(score)
+            if (scores.size >= 3) {
+                presenterContract.finish(scores)
+            } else {
+                presenterContract.nextTongueTwister(score)
+            }
         } else {
             presenterContract.retry(result.second)
         }

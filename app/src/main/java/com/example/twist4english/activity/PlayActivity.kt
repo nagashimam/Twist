@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.view.Gravity
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -116,11 +117,11 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         Pair(tongueTwisters[mPager.currentItem], intent.getFloatExtra(CONFIDENCE_SCORE, 0F))
 
     override fun showNextTongueTwister(score: Float) {
-        showMessage("great! score:$score")
         mPager.currentItem++
     }
 
-    override fun proceedToScoreActivity() {
+    override fun proceedToScoreActivity(scores: List<Float>) {
+        Log.v("来てるよ", "来てるね")
     }
 
     private lateinit var mPager: OneWaySwipePager
