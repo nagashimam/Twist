@@ -20,7 +20,7 @@ import com.example.twist4english.*
 import com.example.twist4english.contract.PlayContract
 import com.example.twist4english.fragment.TongueTwisterSlideFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import java.util.Locale
 
 
 const val TONGUE_TWISTER = "TONGUE_TWISTER"
@@ -122,7 +122,7 @@ class PlayActivity : AppCompatActivity(), PlayContract {
 
     override fun proceedToScoreActivity(score: Int) {
         startActivity(Intent(this, ScoreActivity::class.java).apply {
-            putExtra(CONFIDENCE_SCORE, intent.getFloatExtra(CONFIDENCE_SCORE, 0F))
+            putExtra(CONFIDENCE_SCORE, intent.getFloatExtra(CONFIDENCE_SCORE, 0F).toInt())
             putExtra(SCORE, score)
         })
     }

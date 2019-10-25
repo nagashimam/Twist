@@ -39,22 +39,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="5dp"
                     android:text="@string/score_score"
                     android:textSize="20sp" />
-
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="1dp" />
 
                 <TextView
                     android:id="@+id/score"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:textSize="60sp" />
+                    android:padding="5dp"
+                    android:textSize="50sp" />
 
             </LinearLayout>
 
@@ -66,22 +63,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="5dp"
                     android:text="@string/score_bonus"
                     android:textSize="20sp" />
-
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="1dp" />
 
                 <TextView
                     android:id="@+id/bonus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:textSize="60sp" />
+                    android:padding="5dp"
+                    android:textSize="50sp" />
 
             </LinearLayout>
 
@@ -93,22 +87,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="5dp"
                     android:text="@string/score_total"
                     android:textSize="20sp" />
 
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="1dp" />
-
                 <TextView
                     android:id="@+id/total"
+                    android:layout_marginLeft="0dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:textSize="60sp" />
+                    android:padding="5dp"
+                    android:textSize="50sp" />
 
             </LinearLayout>
 
@@ -120,22 +111,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
+                    android:padding="5dp"
                     android:text="@string/score_rank"
                     android:textSize="20sp" />
-
-                <Space
-                    android:layout_width="20dp"
-                    android:layout_height="1dp" />
 
                 <TextView
                     android:id="@+id/rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp"
-                    android:textSize="60sp" />
+                    android:padding="5dp"
+                    android:textSize="50sp" />
 
             </LinearLayout>
 

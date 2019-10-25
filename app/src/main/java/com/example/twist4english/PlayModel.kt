@@ -1,7 +1,8 @@
 package com.example.twist4english
 
 import com.example.twist4english.contract.PlayPresenterContract
-import java.util.*
+import java.util.Locale
+import kotlin.collections.ArrayList
 
 typealias PlayResult = Pair<Pair<String, Float>, Pair<String, Float>>
 object PlayModel {
