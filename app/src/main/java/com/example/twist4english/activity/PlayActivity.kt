@@ -108,7 +108,7 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         with(Toast(this)) {
             this.view = view
             this.duration = Toast.LENGTH_LONG
-            this.setGravity(Gravity.CENTER, 0, 160)
+            this.setGravity(Gravity.CENTER, 0, 350)
             this.show()
         }
     }
