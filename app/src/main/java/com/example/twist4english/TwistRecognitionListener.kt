@@ -3,19 +3,19 @@ package com.example.twist4english
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer.*
-import android.util.Log
 import com.example.twist4english.contract.PlayContract
 import com.example.twist4english.contract.PlayPresenerContract
 
 class TwistRecognitionListener(private val contract: PlayContract) :
     RecognitionListener,
     PlayPresenerContract {
+
     override fun retry(result: Pair<String, Float>) {
-        Log.v("no good", result.first + ":" + result.second)
+        contract.showMessage("try again\nrecognition: ${result.first}\nscore: ${result.second}")
     }
 
     override fun nextTangueTwister(score: Float) {
-        Log.v("good", score.toString())
+        contract.showNextTongueTwister(score)
     }
 
     // region 何もしない

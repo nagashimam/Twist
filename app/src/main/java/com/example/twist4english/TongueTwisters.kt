@@ -7,7 +7,6 @@ val tongueTwisters = listOf(
     ,"She sells seashells by the seashore"
     ,"How can a clam cram in a clean cream can?"
     ,"I scream, you scream, we all scream for ice cream"
-    ,"I saw Susie sitting in a shoeshine shop"
     ,"Susie works in a shoeshine shop. Where she shines she sits, and where she sits she shines"
     ,"Fuzzy Wuzzy was a bear. Fuzzy Wuzzy had no hair. Fuzzy Wuzzy wasn’t fuzzy, was he?"
     ,"Can you can a can as a canner can can a can?"

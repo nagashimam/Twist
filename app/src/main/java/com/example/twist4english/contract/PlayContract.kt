@@ -5,6 +5,6 @@ interface PlayContract {
     fun end()
     fun showMessage(msg : String)
     fun getExpectedResult(): Pair<String, Float>
-    fun showNextTongueTwister()
+    fun showNextTongueTwister(score : Float)
     fun proceedToScoreActivity()
 }

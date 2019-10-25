@@ -6,6 +6,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.view.Gravity
+import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -16,14 +20,24 @@ import com.example.twist4english.*
 import com.example.twist4english.contract.PlayContract
 import com.example.twist4english.fragment.TongueTwisterSlideFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+
 
 const val TONGUE_TWISTER = "TONGUE_TWISTER"
 const val REQUEST_RECORD_AUDIO = 1
 
 class PlayActivity : AppCompatActivity(), PlayContract {
-    private lateinit var speechRecognizer: SpeechRecognizer
+    private var speechRecognizer: SpeechRecognizer? = null
 
     override fun start() {
+        if (speechRecognizer == null) {
+            speechRecognizer =
+                SpeechRecognizer
+                    .createSpeechRecognizer(applicationContext)
+                    .apply {
+                        setRecognitionListener(TwistRecognitionListener(this@PlayActivity))
+                    }
+        }
         val permission = ContextCompat.checkSelfPermission(this, RECORD_AUDIO)
         if (permission == PackageManager.PERMISSION_GRANTED) {
             startRecording()
@@ -36,17 +50,21 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
             .apply {
                 putExtra(
-                    RecognizerIntent.EXTRA_LANGUAGE_MODEL, //
-                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM //
+                    RecognizerIntent.EXTRA_LANGUAGE_MODEL, // 言語エンジンのモデル
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM // WEBサーチではなく自由入力
                 )
             }.apply {
                 putExtra(
-                    RecognizerIntent.EXTRA_PROMPT, //
-                    tongueTwisters[mPager.currentItem] //
+                    RecognizerIntent.EXTRA_LANGUAGE, // 使用する言語
+                    Locale.US.toString() // 米語
                 )
             }
 
-        speechRecognizer.startListening(intent)
+        if (speechRecognizer == null) {
+            start()
+        } else {
+            speechRecognizer?.startListening(intent)
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -74,15 +92,34 @@ class PlayActivity : AppCompatActivity(), PlayContract {
     }
 
     override fun end() {
+        speechRecognizer?.cancel()
+        speechRecognizer?.destroy()
+        speechRecognizer = null
     }
 
     override fun showMessage(msg: String) {
+        val toast = Toast(this)
+        val inflater = layoutInflater
+
+        val viewGroup = findViewById<RelativeLayout>(R.id.relative_layout)
+
+        // inflateする
+        val view = inflater.inflate(R.layout.custom_toast, viewGroup)
+
+        val textView = view.findViewById<TextView>(R.id.message)
+        textView.text = msg
+
+        toast.view = view
+        toast.duration = Toast.LENGTH_LONG
+        toast.setGravity(Gravity.CENTER, 0, 30)
+
+        toast.show()
     }
 
     override fun getExpectedResult(): Pair<String, Float> =
         Pair(tongueTwisters[mPager.currentItem], intent.getFloatExtra(CONFIDENCE_SCORE, 0F))
 
-    override fun showNextTongueTwister() {
+    override fun showNextTongueTwister(score: Float) {
         mPager.currentItem++
     }
 
@@ -102,15 +139,6 @@ class PlayActivity : AppCompatActivity(), PlayContract {
             )
             setDirection(SwipeDirection.LEFT)
         }
-
-        speechRecognizer =
-            SpeechRecognizer
-                .createSpeechRecognizer(applicationContext)
-                .apply { setRecognitionListener(
-                    TwistRecognitionListener(
-                        this@PlayActivity
-                    )
-                ) }
 
         fab.setOnClickListener { start() }
     }

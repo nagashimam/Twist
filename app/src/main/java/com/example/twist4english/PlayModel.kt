@@ -15,8 +15,16 @@ object PlayModel {
 
     private fun isValidResult(result: PlayResult): Boolean {
         val (expectedResult, actualResult) = result
-        val expectedSpeech = expectedResult.first.toLowerCase(Locale.getDefault())
-        val actualSpeech  = actualResult.first.toLowerCase(Locale.getDefault())
+        val formatter = { str: String ->
+            str.toLowerCase(Locale.getDefault())
+                .replace(",", "")
+                .replace(".", "")
+                .replace(";", "")
+                .replace(":", "")
+                .replace("  ", " ")
+        }
+        val expectedSpeech = formatter(expectedResult.first)
+        val actualSpeech = formatter(actualResult.first)
         return expectedSpeech == actualSpeech && expectedResult.second <= actualResult.second
     }
 }
