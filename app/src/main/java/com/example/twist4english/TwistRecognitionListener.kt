@@ -3,10 +3,18 @@ package com.example.twist4english
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.SpeechRecognizer.*
-//RESULTS_RECOGNITION
+import android.util.Log
+
 class TwistRecognitionListener(private val contract: PlayContract) :
     RecognitionListener,
     PlayPresenerContract {
+    override fun retry(result: Pair<String, Float>) {
+        Log.v("no good", result.first + ":" + result.second)
+    }
+
+    override fun nextTangueTwister(score: Float) {
+        Log.v("good", score.toString())
+    }
 
     // region 何もしない
     override fun onBeginningOfSpeech() {}
@@ -52,10 +60,10 @@ class TwistRecognitionListener(private val contract: PlayContract) :
             ?: ""
 
         val score = results.getFloatArray(CONFIDENCE_SCORES)
-            ?.first()
+            ?.first()?.times(100)
             ?: 0f
 
-        PlayModel.judgeResult(Triple(speech, score, contract.getRequiredScore()), this)
+        PlayModel.judgeResult(Pair(contract.getExpectedResult(), Pair(speech, score)), this)
     }
 
     private fun restart() {

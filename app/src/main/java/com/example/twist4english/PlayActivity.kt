@@ -74,7 +74,8 @@ class PlayActivity : AppCompatActivity(), PlayContract {
     override fun showMessage(msg: String) {
     }
 
-    override fun getRequiredScore(): Int = intent.getIntExtra(CONFIDENCE_SCORE, 0)
+    override fun getExpectedResult(): Pair<String, Float> =
+        Pair(tongueTwisters[mPager.currentItem], intent.getFloatExtra(CONFIDENCE_SCORE, 0F))
 
     override fun showNextTongueTwister() {
         mPager.currentItem++

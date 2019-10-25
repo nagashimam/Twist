@@ -4,7 +4,7 @@ interface PlayContract {
     fun start()
     fun end()
     fun showMessage(msg : String)
-    fun getRequiredScore() : Int
+    fun getExpectedResult(): Pair<String, Float>
     fun showNextTongueTwister()
     fun proceedToScoreActivity()
 }

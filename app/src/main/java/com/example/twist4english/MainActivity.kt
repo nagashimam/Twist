@@ -45,7 +45,7 @@ private class ScreenSlidePagerAdapter(fm: FragmentManager) :
         return LevelSlideFragment().apply {
             val level = Level.values()[position]
             arguments = Bundle().apply {
-                putInt(CONFIDENCE_SCORE, level.requiredConfidentScore)
+                putFloat(CONFIDENCE_SCORE, level.requiredConfidentScore)
                 putString(TITLE, level.title)
             }
         }
@@ -53,8 +53,8 @@ private class ScreenSlidePagerAdapter(fm: FragmentManager) :
 
 }
 
-enum class Level(val title: String, val requiredConfidentScore: Int) {
-    EASY("Easy", 70),
-    MEDIUM("Medium", 80),
-    HARD("Hard", 90);
+enum class Level(val title: String, val requiredConfidentScore: Float) {
+    EASY("Easy", 70F),
+    MEDIUM("Medium", 80F),
+    HARD("Hard", 90F);
 }

@@ -24,7 +24,7 @@ class LevelSlideFragment : Fragment() {
             linearLayout.findViewById<TextView>(R.id.level_title).text =
                 it.getString(TITLE)
 
-            val requiredConfidence = it.getInt(CONFIDENCE_SCORE).toString()
+            val requiredConfidence = it.getFloat(CONFIDENCE_SCORE).toString()
             val message =
                 "means you have to get $requiredConfidence points or more for each tongue twister!"
             linearLayout.findViewById<TextView>(R.id.level_description).text = message
