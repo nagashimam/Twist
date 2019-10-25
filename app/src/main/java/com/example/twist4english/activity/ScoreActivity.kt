@@ -1,5 +1,6 @@
 package com.example.twist4english.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
@@ -27,6 +28,16 @@ class ScoreActivity : AppCompatActivity() {
         val score = intent.getIntExtra(SCORE, 0)
         val bonus = intent.getIntExtra(CONFIDENCE_SCORE, 0)
         addScore(score, bonus)
+
+        fab.setOnClickListener {
+            Intent(this, MainActivity::class.java)
+                .apply {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                .also {
+                    startActivity(it)
+                }
+        }
     }
 
     private fun addScore(score: Int, bonus: Int) {
