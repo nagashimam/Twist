@@ -11,8 +11,7 @@ class TwistRecognitionListener(private val contract: PlayContract) :
     PlayPresenterContract {
 
     override fun finish(scores: List<Float>) {
-        contract.showMessage("great! score:${scores.last()}")
-        contract.proceedToScoreActivity(scores)
+        contract.proceedToScoreActivity(scores.sum().toInt())
     }
 
     override fun retry(result: Pair<String, Float>) {

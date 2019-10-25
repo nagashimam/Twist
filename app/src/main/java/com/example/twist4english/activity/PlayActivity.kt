@@ -6,7 +6,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
-import android.util.Log
 import android.view.Gravity
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -26,6 +25,7 @@ import java.util.*
 
 const val TONGUE_TWISTER = "TONGUE_TWISTER"
 const val REQUEST_RECORD_AUDIO = 1
+const val SCORE = "SCORE"
 
 class PlayActivity : AppCompatActivity(), PlayContract {
     private var speechRecognizer: SpeechRecognizer? = null
@@ -108,7 +108,7 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         with(Toast(this)) {
             this.view = view
             this.duration = Toast.LENGTH_LONG
-            this.setGravity(Gravity.CENTER, 0, 120)
+            this.setGravity(Gravity.CENTER, 0, 160)
             this.show()
         }
     }
@@ -120,8 +120,11 @@ class PlayActivity : AppCompatActivity(), PlayContract {
         mPager.currentItem++
     }
 
-    override fun proceedToScoreActivity(scores: List<Float>) {
-        Log.v("来てるよ", "来てるね")
+    override fun proceedToScoreActivity(score: Int) {
+        startActivity(Intent(this, ScoreActivity::class.java).apply {
+            putExtra(CONFIDENCE_SCORE, intent.getFloatExtra(CONFIDENCE_SCORE, 0F))
+            putExtra(SCORE, score)
+        })
     }
 
     private lateinit var mPager: OneWaySwipePager
