@@ -98,22 +98,18 @@ class PlayActivity : AppCompatActivity(), PlayContract {
     }
 
     override fun showMessage(msg: String) {
-        val toast = Toast(this)
-        val inflater = layoutInflater
-
         val viewGroup = findViewById<RelativeLayout>(R.id.relative_layout)
 
-        // inflateする
-        val view = inflater.inflate(R.layout.custom_toast, viewGroup)
+        val view = layoutInflater.inflate(R.layout.custom_toast, viewGroup).apply {
+            findViewById<TextView>(R.id.message).text = msg
+        }
 
-        val textView = view.findViewById<TextView>(R.id.message)
-        textView.text = msg
-
-        toast.view = view
-        toast.duration = Toast.LENGTH_LONG
-        toast.setGravity(Gravity.CENTER, 0, 30)
-
-        toast.show()
+        with(Toast(this)) {
+            this.view = view
+            this.duration = Toast.LENGTH_LONG
+            this.setGravity(Gravity.CENTER, 0, 120)
+            this.show()
+        }
     }
 
     override fun getExpectedResult(): Pair<String, Float> =
