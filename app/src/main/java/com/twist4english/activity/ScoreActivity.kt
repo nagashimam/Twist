@@ -2,14 +2,16 @@ package com.twist4english.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.twist4english.R
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.FirebaseFunctions
+import com.twist4english.R
 import kotlinx.android.synthetic.main.activity_score.*
 
 
@@ -50,33 +52,17 @@ class ScoreActivity : AppCompatActivity() {
     }
 
     private fun readScores(db: FirebaseFirestore, score: Int, bonus: Int) {
-        db.collection("scores")
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful && task.result != null) {
-                    val scoreSize = task.result?.size() ?: 1
-                    var counter = 0
-                    task.result?.forEach {
-                        if (it.data["score"].toString().toInt() > score * bonus) {
-                            counter++
-                        }
-                    }
+        val data = hashMapOf(
+            "score" to score,
+            "bonus" to bonus
+        )
 
-                    val percent = (counter.toDouble() / scoreSize.toDouble() * 100).toInt()
-                    val displayPercent = if (percent == 0) {
-                        1
-                    } else {
-                        percent
-                    }
-
-                    setDataToTextViews(
-                        score,
-                        bonus,
-                        displayPercent
-                    )
-                } else {
-                    showErrorMessage()
-                }
+        FirebaseFunctions.getInstance()
+            .getHttpsCallable("calculateDisplayPercent")
+            .call(data)
+            .continueWith { task ->
+                Log.v("戻り値", task.result?.data as String)
+                setDataToTextViews(score, bonus, Integer.parseInt(task.result?.data as String))
             }
     }
 
