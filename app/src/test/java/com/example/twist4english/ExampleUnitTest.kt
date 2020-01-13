@@ -1,4 +1,4 @@
-package com.example.twist4english
+package com.twist4english
 
 import org.junit.Test
 

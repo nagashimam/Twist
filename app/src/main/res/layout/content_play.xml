@@ -25,7 +25,7 @@
             style="@style/TitleTextView"
             android:text="@string/play_title" />
 
-        <com.example.twist4english.OneWaySwipePager
+        <com.twist4english.OneWaySwipePager
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="260dp" />
